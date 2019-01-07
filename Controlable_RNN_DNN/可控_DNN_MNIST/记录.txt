@@ -1,0 +1,22 @@
+learning rate decay-- 有效降低梯度下降到同样损失值的时间
+batch norm --有效降低梯度下降到同样损失值的时间
+换损失函数 --没啥用还无效
+去掉最后一层sigmoid:会让神经网络无效
+加大Index权重 --有用 ，损失值下降变快，但损失值不稳定，因为最后一层是sigmoid函数，超不过1。将最后一层的sigmoid去掉之后，和单纯去掉sigmoid区别不大
+用随机值做输入：没用
+
+改激活函数：tanh有效，sigmoid有效但不如tanh（在数量有限的训练集下）
+前面层用relu最后一层sigmoid：效果稍微好于纯sigmoid，但在测试集上效果很差（在数量有限的训练集下）
+最后一层也是relu：训练集还可以，但测试集效果很差（尽管重构的图片也是0到1 的值），降低学习率：没有什么用，换成leaky_relu:没什么用（在数量有限的训练集下）
+纯relu：损失下降比较慢，但也可以学习了，也有可能是超参数用的不合适
+只有sigmoid/tanh-...-sigmoid在训练集和测试集都管用（在数量有限的训练集下）
+降低cost  随着cost的减小：在train,test分布一致的情况下没啥过拟合的情况
+增大batch: 对于消除过拟合很有效，MNIST数据集还是比较好，因为测试集和训练集的分布很相近。可以明显的看到神经网络学到了更多情况后在测试集的表现就变好很多了
+
+
+TODO:正则化，seq2seq，tensorboard，大batch下加大Index权重
+
+看一眼frozenlake里面slippery的概率
+https://github.com/openai/gym/blob/master/gym/envs/toy_text/frozen_lake.py
+
+信息隐蔽： 把输入当做比特（输入的信息），输出照常，看看神经网络能不能学回来
